@@ -1,6 +1,7 @@
-import { getUserName } from "./utils/func.js";
 import readline from "readline";
 import { getErrorStr, getGoodbyeStr, getGreetingStr } from "./const.js";
+import { getUserName } from "./utils/func.js";
+import { getHelpTxt } from "./help/index.js";
 
 class App {
   constructor() {
@@ -29,12 +30,12 @@ class App {
           break;
 
         case ".help":
-          console.log("< echo .help");
-          console.log(" Command is not implemented!\n");
+          console.log(getHelpTxt());
           break;
 
         case "":
           console.log();
+          console.log(" Command is not implemented!\n");
           break;
 
         default:
