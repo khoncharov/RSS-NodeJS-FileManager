@@ -1,4 +1,7 @@
-import process from "process";
+import { app } from "./app/index.js";
 
-console.log("test");
-console.log(process.argv.slice(2));
+const bootstrap = () => {
+  app.init();
+};
+
+bootstrap();
