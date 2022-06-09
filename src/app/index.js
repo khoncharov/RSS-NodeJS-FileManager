@@ -1,7 +1,8 @@
 import readline from "readline";
 import { getErrorStr, getGoodbyeStr, getGreetingStr } from "./const.js";
-import { getUserName } from "./utils/func.js";
+import { getUserName, logWarn } from "./utils/func.js";
 import { getHelpTxt } from "./help/index.js";
+import { osHandler } from "./os/index.js";
 
 class App {
   constructor() {
@@ -16,30 +17,100 @@ class App {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
-      prompt: "> ",
+      prompt: "\n> ",
     });
 
     rl.prompt();
 
     rl.on("line", (line) => {
-      const command = line.trim();
+      const commandsArr = line.trim().split(/\ +/);
+      const command = commandsArr[0];
+      const params = commandsArr.slice(1);
+      const paramsAdded = Boolean(params.length);
+
+      // logWarn(`<dev> : cmd> ${command}`);
+      // logWarn(`<dev> : params> ${params}`);
+      // logWarn("-----------------------------\n");
 
       switch (command) {
         case ".exit":
+          if (paramsAdded) {
+            logWarn(getErrorStr());
+            break;
+          }
           rl.close();
           break;
 
         case ".help":
+          if (paramsAdded) {
+            logWarn(getErrorStr());
+            break;
+          }
           console.log(getHelpTxt());
           break;
 
-        case "":
-          console.log();
-          console.log(" Command is not implemented!\n");
+        case ".cls":
+          if (paramsAdded) {
+            logWarn(getErrorStr());
+            break;
+          }
+          console.clear();
+          break;
+
+        case "up":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "cd":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "ls":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "cat":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "add":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "rn":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "cp":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "mv":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "rm":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "os":
+          osHandler(params);
+          break;
+
+        case "hash":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "compress":
+          console.log(" Command is not implemented!");
+          break;
+
+        case "decompress":
+          console.log(" Command is not implemented!");
           break;
 
         default:
-          console.error(getErrorStr());
+          logWarn(getErrorStr());
           break;
       }
       rl.prompt();
