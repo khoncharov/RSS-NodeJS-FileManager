@@ -1,12 +1,14 @@
 import readline from "readline";
-import { getErrorStr, getGoodbyeStr, getGreetingStr } from "./const.js";
+import { getErrorStr, getGoodbyeStr, getGreetingStr, getPromptStr } from "./const.js";
 import { getUserName, logWarn } from "./utils/func.js";
 import { getHelpTxt } from "./help/index.js";
 import { osHandler } from "./os/index.js";
+import os from "os";
 
 class App {
   constructor() {
     this.userName = "";
+    this.currentDir = os.homedir();
   }
 
   init() {
@@ -17,7 +19,7 @@ class App {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
-      prompt: "\n> ",
+      prompt: getPromptStr(this.currentDir),
     });
 
     rl.prompt();
