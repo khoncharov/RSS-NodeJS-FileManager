@@ -10,7 +10,6 @@ export const osHandler = (params) => {
     switch (param) {
       case "--EOL":
         console.dir(os.EOL);
-        logInfo(String(os.EOL).replace(/\\/g, "\\\\"));
         break;
 
       case "--cpus":
