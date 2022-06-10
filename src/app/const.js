@@ -4,8 +4,8 @@ export const getGreetingStr = (userName) =>
 export const getPromptStr = (currentDir) =>
   `\n\x1b[32m You are currently in \x1b[0m${currentDir}\n\n> `;
 
-export const getGoodbyeStr = () => "\n Have a great day!\n";
+export const getGoodbyeStr = () => '\n Have a great day!\n';
 
-export const getErrorStr = () => "Invalid input";
+export const getInvalidInputStr = () => 'Invalid input';
 
-export const getFailedStateStr = () => "Operation failed";
+export const getOperationFailedStr = () => 'Operation failed';

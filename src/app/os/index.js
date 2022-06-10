@@ -1,6 +1,6 @@
-import os from "os";
-import { getErrorStr } from "../const.js";
-import { logInfo, logWarn } from "../utils/func.js";
+import os from 'os';
+import { getInvalidInputStr } from '../const.js';
+import { logInfo, logWarn } from '../utils/func.js';
 
 export const osHandler = (params) => {
   const paramsCount = params.length;
@@ -8,11 +8,11 @@ export const osHandler = (params) => {
 
   if (paramsCount === 1) {
     switch (param) {
-      case "--EOL":
+      case '--EOL':
         console.dir(os.EOL);
         break;
 
-      case "--cpus":
+      case '--cpus':
         const cpuInfo = os.cpus();
 
         logInfo(`cpu count: ${cpuInfo.length}`);
@@ -23,24 +23,24 @@ export const osHandler = (params) => {
         });
         break;
 
-      case "--homedir":
+      case '--homedir':
         logInfo(os.homedir());
         break;
 
-      case "--username":
+      case '--username':
         logInfo(process.env.USERNAME);
         break;
 
-      case "--arch":
-      case "--architecture":
+      case '--arch':
+      case '--architecture':
         logInfo(process.arch);
         break;
 
       default:
-        logWarn(getErrorStr());
+        logWarn(getInvalidInputStr());
         break;
     }
   } else {
-    logWarn(getErrorStr());
+    logWarn(getInvalidInputStr());
   }
 };
