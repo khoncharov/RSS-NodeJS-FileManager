@@ -22,6 +22,13 @@ export const parseLine = (str) => {
   return { command, params };
 };
 
+export const stripDoubleQuotes = (str) => {
+  if (str[0] === '"' && str[str.length - 1] === '"') {
+    return str.slice(1, -1);
+  }
+  return str;
+};
+
 export const isProvided = (params) => !!params.length;
 
 export const logInfo = (str) => console.log(`\x1b[1;36m ${str}\x1b[0m`);

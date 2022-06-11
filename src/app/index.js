@@ -1,16 +1,20 @@
 import os from 'os';
 import readline from 'readline';
-import {
-  getInvalidInputStr,
-  getGoodbyeStr,
-  getGreetingStr,
-  getPromptStr,
-  getOperationFailedStr,
-} from './const.js';
-import { getUserName, isProvided, logInfo, logWarn, parseLine } from './utils/func.js';
+import { getInvalidInputStr } from './const.js';
+import { getGoodbyeStr } from './const.js';
+import { getGreetingStr } from './const.js';
+import { getPromptStr } from './const.js';
+import { getOperationFailedStr } from './const.js';
+import { getUserName } from './utils/func.js';
+import { isProvided } from './utils/func.js';
+import { logInfo } from './utils/func.js';
+import { logWarn } from './utils/func.js';
+import { parseLine } from './utils/func.js';
+import { stripDoubleQuotes } from './utils/func.js';
 import { getHelpTxt } from './help/index.js';
 import { cdHandler, lsHandler, upHandler } from './nav/index.js';
 import { osHandler } from './os/index.js';
+import { hashHandler } from './hash/index.js';
 
 class App {
   constructor() {
@@ -75,7 +79,7 @@ class App {
             this.do_os(params);
             break;
           case 'hash':
-            this.inputError(': Command is not implemented!');
+            this.do_hash(params);
             break;
           case 'compress':
             this.inputError(': Command is not implemented!');
@@ -121,7 +125,7 @@ class App {
   }
 
   async do_cd(params) {
-    const destPath = params;
+    const destPath = stripDoubleQuotes(params);
 
     if (destPath) {
       try {
@@ -149,6 +153,23 @@ class App {
   do_os(params) {
     const result = osHandler(params);
     result ? logInfo(result) : this.inputError();
+    this.readline.prompt();
+  }
+
+  async do_hash(params) {
+    const destPath = stripDoubleQuotes(params);
+
+    if (destPath) {
+      try {
+        const hash = await hashHandler(this.currDir, params);
+        logInfo(hash);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
