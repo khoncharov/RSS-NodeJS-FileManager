@@ -3,8 +3,7 @@ import os from 'os';
 export const osHandler = (param) => {
   switch (param) {
     case '--EOL':
-      console.dir(os.EOL);
-      return 'lf';
+      return JSON.stringify(os.EOL);
 
     case '--cpus':
       let result = '';
