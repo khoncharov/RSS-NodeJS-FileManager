@@ -11,9 +11,14 @@ export const getUserName = () => {
 };
 
 export const parseLine = (str) => {
-  const arr = str.trim().split(/\ +/);
-  const command = arr[0];
-  const params = arr.slice(1);
+  const command = str.trim().split(/\ +/, 1)[0];
+  const params = str.trim().slice(command.length).trim();
+
+  // console.log('::: com>');
+  // console.dir(command);
+  // console.log('::: par>');
+  // console.dir(params);
+
   return { command, params };
 };
 
