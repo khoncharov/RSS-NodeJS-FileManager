@@ -1,44 +1,37 @@
 import os from 'os';
 
-export const osHandler = (params) => {
-  const paramsCount = params.length;
-  const param = params[0];
+export const osHandler = (param) => {
+  switch (param) {
+    case '--EOL':
+      console.dir(os.EOL);
+      return 'lf';
 
-  if (paramsCount === 1) {
-    switch (param) {
-      case '--EOL':
-        console.dir(os.EOL);
-        return 'lf';
+    case '--cpus':
+      let result = '';
 
-      case '--cpus':
-        let result = '';
+      const cpuInfo = os.cpus();
 
-        const cpuInfo = os.cpus();
+      result += `cpu count: ${cpuInfo.length}`;
 
-        result += `cpu count: ${cpuInfo.length}`;
+      cpuInfo.forEach((cpu, idx) => {
+        result += `\n cpu ${(idx += 1)}`;
+        result += `\n - model: ${cpu.model}`;
+        result += `\n - speed: ${(cpu.speed / 1000).toFixed(3)} GHz`;
+      });
 
-        cpuInfo.forEach((cpu, idx) => {
-          result += `\n cpu ${(idx += 1)}`;
-          result += `\n - model: ${cpu.model}`;
-          result += `\n - speed: ${(cpu.speed / 1000).toFixed(3)} GHz`;
-        });
+      return result;
 
-        return result;
+    case '--homedir':
+      return os.homedir();
 
-      case '--homedir':
-        return os.homedir();
+    case '--username':
+      return process.env.USERNAME;
 
-      case '--username':
-        return process.env.USERNAME;
+    case '--arch':
+    case '--architecture':
+      return process.arch;
 
-      case '--arch':
-      case '--architecture':
-        return process.arch;
-
-      default:
-        return null;
-    }
+    default:
+      return null;
   }
-
-  return null;
 };
