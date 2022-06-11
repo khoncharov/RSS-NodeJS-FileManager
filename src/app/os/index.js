@@ -1,6 +1,4 @@
 import os from 'os';
-import { getInvalidInputStr } from '../const.js';
-import { logInfo, logWarn } from '../utils/func.js';
 
 export const osHandler = (params) => {
   const paramsCount = params.length;
@@ -10,37 +8,37 @@ export const osHandler = (params) => {
     switch (param) {
       case '--EOL':
         console.dir(os.EOL);
-        break;
+        return 'lf';
 
       case '--cpus':
+        let result = '';
+
         const cpuInfo = os.cpus();
 
-        logInfo(`cpu count: ${cpuInfo.length}`);
+        result += `cpu count: ${cpuInfo.length}`;
+
         cpuInfo.forEach((cpu, idx) => {
-          logInfo(`cpu ${(idx += 1)}`);
-          logInfo(`- model: ${cpu.model}`);
-          logInfo(`- speed: ${(cpu.speed / 1000).toFixed(3)} GHz`);
+          result += `\n cpu ${(idx += 1)}`;
+          result += `\n - model: ${cpu.model}`;
+          result += `\n - speed: ${(cpu.speed / 1000).toFixed(3)} GHz`;
         });
-        break;
+
+        return result;
 
       case '--homedir':
-        logInfo(os.homedir());
-        break;
+        return os.homedir();
 
       case '--username':
-        logInfo(process.env.USERNAME);
-        break;
+        return process.env.USERNAME;
 
       case '--arch':
       case '--architecture':
-        logInfo(process.arch);
-        break;
+        return process.arch;
 
       default:
-        logWarn(getInvalidInputStr());
-        break;
+        return null;
     }
-  } else {
-    logWarn(getInvalidInputStr());
   }
+
+  return null;
 };
