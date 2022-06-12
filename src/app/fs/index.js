@@ -98,20 +98,19 @@ export const cpFileHandler = async (currDir, paramsArr) => {
  * @param {string[]} paramsArr
  */
 export const mvFileHandler = async (currDir, paramsArr) => {
-  const fileToMove = path.resolve(currDir, paramsArr[0]);
+  const pathToSource = path.resolve(currDir, paramsArr[0]);
+  const sourceName = path.parse(pathToSource).base;
+  const pathToDest = path.resolve(currDir, paramsArr[1], sourceName);
 
-  // const newFileName = paramsArr[1];
-  // const pathToNewFile = path.resolve(pathToFile, '..', newFileName);
-
-  // try {
-  //   if (await isExistingPath(pathToFile)) {
-  //     await fsPromise.rename(pathToFile, pathToNewFile);
-  //   } else {
-  //     throw new Error();
-  //   }
-  // } catch {
-  //   throw new Error();
-  // }
+  try {
+    if (await isExistingPath(pathToSource)) {
+      await fsPromise.rename(pathToSource, pathToDest);
+    } else {
+      throw new Error();
+    }
+  } catch {
+    throw new Error();
+  }
 };
 
 /** Remove file function
