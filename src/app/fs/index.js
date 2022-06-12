@@ -1,6 +1,16 @@
 import fsPromise from 'fs/promises';
 import path from 'path';
 
+export const isExistingPath = async (path) => {
+  try {
+    const fd = await fsPromise.open(path, 'r');
+    await fd.close();
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const catFileHandler = async (currDir, params) => {
   const pathToFile = path.resolve(currDir, params);
 
@@ -26,22 +36,37 @@ export const addFileHandler = async (currDir, params) => {
   }
 };
 
-export const rnFileHandler = (currDir, params) => {};
+export const rnFileHandler = async (currDir, paramsArr) => {
+  const pathToFile = path.resolve(currDir, paramsArr[0]);
 
-export const cpFileHandler = (currDir, params) => {};
+  const newFileName = paramsArr[1];
+  const pathToNewFile = path.resolve(pathToFile, '..', newFileName);
 
-export const mvFileHandler = (currDir, params) => {};
+  try {
+    if (await isExistingPath(pathToFile)) {
+      await fsPromise.rename(pathToFile, pathToNewFile);
+    } else {
+      throw new Error();
+    }
+  } catch {
+    throw new Error();
+  }
+};
+
+export const cpFileHandler = async (currDir, paramsArr) => {};
+
+export const mvFileHandler = async (currDir, paramsArr) => {};
 
 export const rmFileHandler = async (currDir, params) => {
   const pathToFile = path.resolve(currDir, params);
 
-  let fd;
   try {
-    fd = await fsPromise.open(pathToFile, 'r');
-    await fd.close();
-    await fsPromise.rm(pathToFile);
+    if (await isExistingPath(pathToFile)) {
+      await fsPromise.rm(pathToFile);
+    } else {
+      throw new Error();
+    }
   } catch {
     throw new Error();
-  } finally {
   }
 };

@@ -14,7 +14,8 @@ import { parseLine } from './utils/func.js';
 import { stripDoubleQuotes } from './utils/func.js';
 import { getHelpTxt } from './help/index.js';
 import { cdHandler, lsHandler, upHandler } from './nav/index.js';
-import { addFileHandler, catFileHandler, rmFileHandler } from './fs/index.js';
+import { addFileHandler, catFileHandler, cpFileHandler } from './fs/index.js';
+import { mvFileHandler, rmFileHandler, rnFileHandler } from './fs/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
 import { unzipFile, zipFile } from './zip/index.js';
@@ -187,18 +188,51 @@ class App {
     this.readline.prompt();
   }
 
-  do_rn(params) {
-    this.inputError('::: rn not implemented.');
+  async do_rn(params) {
+    const paramsArr = parseParams(params);
+
+    if (paramsArr.length === 2) {
+      try {
+        await rnFileHandler(this.currDir, paramsArr);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
-  do_cp(params) {
-    this.inputError('::: cp not implemented.');
+  async do_cp(params) {
+    const paramsArr = parseParams(params);
+
+    if (paramsArr.length === 2) {
+      try {
+        await cpFileHandler(this.currDir, paramsArr);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
-  do_mv(params) {
-    this.inputError('::: mv not implemented.');
+  async do_mv(params) {
+    const paramsArr = parseParams(params);
+
+    if (paramsArr.length === 2) {
+      try {
+        await mvFileHandler(this.currDir, paramsArr);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
