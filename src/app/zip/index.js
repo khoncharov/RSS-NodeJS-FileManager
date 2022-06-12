@@ -13,8 +13,8 @@ export const zipFile = async (currDir, paramsArr) => {
       zlib.createBrotliCompress(),
       fs.createWriteStream(destPath),
     );
-  } catch (err) {
-    console.error(err);
+  } catch {
+    throw new Error();
   }
 };
 
@@ -22,9 +22,13 @@ export const unzipFile = async (currDir, paramsArr) => {
   const sourceFile = path.resolve(currDir, paramsArr[0]);
   const destPath = path.resolve(currDir, paramsArr[1]);
 
-  await stream.pipeline(
-    fs.createReadStream(sourceFile),
-    zlib.createBrotliDecompress(),
-    fs.createWriteStream(destPath),
-  );
+  try {
+    await stream.pipeline(
+      fs.createReadStream(sourceFile),
+      zlib.createBrotliDecompress(),
+      fs.createWriteStream(destPath),
+    );
+  } catch {
+    throw new Error();
+  }
 };

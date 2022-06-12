@@ -21,11 +21,11 @@ export const getHelpTxt = () => `List of operations:
   os --cpus
   os --homedir
   os --username
-  os --architecture
+  os --architecture (shortcut: --arch)
 
 - Hash calculation
   hash path_to_file
 
 - Compress and decompress operations
-  compress path_to_file path_to_destination
-  decompress path_to_file path_to_destination`;
+  compress path_to_file path_to_destination  (shortcut: zip)
+  decompress path_to_file path_to_destination  (shortcut: unzip)`;

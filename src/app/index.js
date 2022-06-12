@@ -100,7 +100,7 @@ class App {
         }
       })
       .on('close', () => {
-        console.log(getGoodbyeStr());
+        console.log(getGoodbyeStr(this.username));
         process.exit();
       });
   }
