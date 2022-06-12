@@ -259,9 +259,9 @@ class App {
   }
 
   async do_hash(params) {
-    const destPath = stripDoubleQuotes(params);
+    const destToFile = stripDoubleQuotes(params);
 
-    if (destPath) {
+    if (destToFile) {
       try {
         const hash = await hashHandler(this.currDir, destToFile);
         logInfo(hash);
