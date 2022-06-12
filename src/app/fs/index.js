@@ -32,4 +32,16 @@ export const cpFileHandler = (currDir, params) => {};
 
 export const mvFileHandler = (currDir, params) => {};
 
-export const rmFileHandler = (currDir, params) => {};
+export const rmFileHandler = async (currDir, params) => {
+  const pathToFile = path.resolve(currDir, params);
+
+  let fd;
+  try {
+    fd = await fsPromise.open(pathToFile, 'r');
+    await fd.close();
+    await fsPromise.rm(pathToFile);
+  } catch {
+    throw new Error();
+  } finally {
+  }
+};

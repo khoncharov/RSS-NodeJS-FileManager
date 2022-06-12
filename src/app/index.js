@@ -14,10 +14,10 @@ import { parseLine } from './utils/func.js';
 import { stripDoubleQuotes } from './utils/func.js';
 import { getHelpTxt } from './help/index.js';
 import { cdHandler, lsHandler, upHandler } from './nav/index.js';
+import { addFileHandler, catFileHandler, rmFileHandler } from './fs/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
 import { unzipFile, zipFile } from './zip/index.js';
-import { addFileHandler, catFileHandler } from './fs/index.js';
 
 class App {
   constructor() {
@@ -160,7 +160,7 @@ class App {
 
     if (destToFile) {
       try {
-        await catFileHandler(this.currDir, params);
+        await catFileHandler(this.currDir, destToFile);
       } catch {
         this.operationFail();
       }
@@ -176,7 +176,7 @@ class App {
 
     if (destToFile) {
       try {
-        await addFileHandler(this.currDir, params);
+        await addFileHandler(this.currDir, destToFile);
       } catch {
         this.operationFail();
       }
@@ -202,8 +202,19 @@ class App {
     this.readline.prompt();
   }
 
-  do_rm(params) {
-    this.inputError('::: rm not implemented.');
+  async do_rm(params) {
+    const destToFile = stripDoubleQuotes(params);
+
+    if (destToFile) {
+      try {
+        await rmFileHandler(this.currDir, destToFile);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
@@ -218,7 +229,7 @@ class App {
 
     if (destPath) {
       try {
-        const hash = await hashHandler(this.currDir, params);
+        const hash = await hashHandler(this.currDir, destToFile);
         logInfo(hash);
       } catch {
         this.operationFail();
