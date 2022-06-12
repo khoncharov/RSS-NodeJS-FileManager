@@ -1,3 +1,4 @@
+import fs from 'fs';
 import fsPromise from 'fs/promises';
 import path from 'path';
 
@@ -11,6 +12,11 @@ export const isExistingPath = async (path) => {
   }
 };
 
+/** Print file content function
+ *
+ * @param {string} currDir
+ * @param {string} params
+ */
 export const catFileHandler = async (currDir, params) => {
   const pathToFile = path.resolve(currDir, params);
 
@@ -23,6 +29,11 @@ export const catFileHandler = async (currDir, params) => {
   }
 };
 
+/** Create new file function
+ *
+ * @param {string} currDir
+ * @param {string} params
+ */
 export const addFileHandler = async (currDir, params) => {
   const pathToFile = path.resolve(currDir, params);
 
@@ -36,6 +47,11 @@ export const addFileHandler = async (currDir, params) => {
   }
 };
 
+/** Rename file/dir function
+ *
+ * @param {string} currDir
+ * @param {string[]} paramsArr
+ */
 export const rnFileHandler = async (currDir, paramsArr) => {
   const pathToFile = path.resolve(currDir, paramsArr[0]);
 
@@ -53,10 +69,40 @@ export const rnFileHandler = async (currDir, paramsArr) => {
   }
 };
 
-export const cpFileHandler = async (currDir, paramsArr) => {};
+/** Copy file function
+ *
+ * @param {string} currDir
+ * @param {string[]} paramsArr
+ */
+export const cpFileHandler = async (currDir, paramsArr) => {
+  const pathToFile = path.resolve(currDir, paramsArr[0]);
+  const pathToDestFile = path.resolve(currDir, paramsArr[1]);
 
+  const mode = fs.constants.COPYFILE_EXCL;
+
+  try {
+    if (await isExistingPath(pathToFile)) {
+      await fsPromise.copyFile(pathToFile, pathToDestFile, mode);
+    } else {
+      throw new Error();
+    }
+  } catch {
+    throw new Error();
+  }
+};
+
+/** Move file function
+ *
+ * @param {string} currDir
+ * @param {string[]} paramsArr
+ */
 export const mvFileHandler = async (currDir, paramsArr) => {};
 
+/** Remove file function
+ *
+ * @param {string} currDir
+ * @param {string} params
+ */
 export const rmFileHandler = async (currDir, params) => {
   const pathToFile = path.resolve(currDir, params);
 
