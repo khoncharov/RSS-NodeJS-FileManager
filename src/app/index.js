@@ -17,6 +17,7 @@ import { cdHandler, lsHandler, upHandler } from './nav/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
 import { unzipFile, zipFile } from './zip/index.js';
+import { addFileHandler } from './fs/index.js';
 
 class App {
   constructor() {
@@ -159,8 +160,19 @@ class App {
     this.readline.prompt();
   }
 
-  do_add(params) {
-    this.inputError('::: add not implemented.');
+  async do_add(params) {
+    const destToFile = stripDoubleQuotes(params);
+
+    if (destToFile) {
+      try {
+        await addFileHandler(this.currDir, params);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 
