@@ -60,22 +60,22 @@ class App {
             this.do_ls(params);
             break;
           case 'cat':
-            this.inputError(': Command is not implemented!');
+            this.do_cat(params);
             break;
           case 'add':
-            this.inputError(': Command is not implemented!');
+            this.do_add(params);
             break;
           case 'rn':
-            this.inputError(': Command is not implemented!');
+            this.do_rn(params);
             break;
           case 'cp':
-            this.inputError(': Command is not implemented!');
+            this.do_cp(params);
             break;
           case 'mv':
-            this.inputError(': Command is not implemented!');
+            this.do_mv(params);
             break;
           case 'rm':
-            this.inputError(': Command is not implemented!');
+            this.do_rm(params);
             break;
           case 'os':
             this.do_os(params);
@@ -151,6 +151,36 @@ class App {
     } else {
       console.log(await lsHandler(this.currDir));
     }
+    this.readline.prompt();
+  }
+
+  do_cat(params) {
+    this.inputError('::: cat not implemented.');
+    this.readline.prompt();
+  }
+
+  do_add(params) {
+    this.inputError('::: add not implemented.');
+    this.readline.prompt();
+  }
+
+  do_rn(params) {
+    this.inputError('::: rn not implemented.');
+    this.readline.prompt();
+  }
+
+  do_cp(params) {
+    this.inputError('::: cp not implemented.');
+    this.readline.prompt();
+  }
+
+  do_mv(params) {
+    this.inputError('::: mv not implemented.');
+    this.readline.prompt();
+  }
+
+  do_rm(params) {
+    this.inputError('::: rm not implemented.');
     this.readline.prompt();
   }
 
