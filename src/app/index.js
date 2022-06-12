@@ -17,7 +17,7 @@ import { cdHandler, lsHandler, upHandler } from './nav/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
 import { unzipFile, zipFile } from './zip/index.js';
-import { addFileHandler } from './fs/index.js';
+import { addFileHandler, catFileHandler } from './fs/index.js';
 
 class App {
   constructor() {
@@ -155,8 +155,19 @@ class App {
     this.readline.prompt();
   }
 
-  do_cat(params) {
-    this.inputError('::: cat not implemented.');
+  async do_cat(params) {
+    const destToFile = stripDoubleQuotes(params);
+
+    if (destToFile) {
+      try {
+        await catFileHandler(this.currDir, params);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
     this.readline.prompt();
   }
 

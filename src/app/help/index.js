@@ -1,6 +1,6 @@
 export const getHelpTxt = () => `List of operations:
 
-- Use double quotes to enter parameters with a space.
+- Use double quotes to enter 2 paths where at least one with a space.
 - .exit .help .cls
 
 - Navigation & working directory
