@@ -6,6 +6,7 @@ import { getGreetingStr } from './const.js';
 import { getPromptStr } from './const.js';
 import { getOperationFailedStr } from './const.js';
 import { getUserName } from './utils/func.js';
+import { parseParams } from './utils/func.js';
 import { isProvided } from './utils/func.js';
 import { logInfo } from './utils/func.js';
 import { logWarn } from './utils/func.js';
@@ -15,6 +16,7 @@ import { getHelpTxt } from './help/index.js';
 import { cdHandler, lsHandler, upHandler } from './nav/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
+import { unzipFile, zipFile } from './zip/index.js';
 
 class App {
   constructor() {
@@ -81,11 +83,13 @@ class App {
           case 'hash':
             this.do_hash(params);
             break;
+          case 'zip':
           case 'compress':
-            this.inputError(': Command is not implemented!');
+            this.do_compress(params);
             break;
+          case 'unzip':
           case 'decompress':
-            this.inputError(': Command is not implemented!');
+            this.do_decompress(params);
             break;
           default:
             this.inputError();
@@ -163,6 +167,38 @@ class App {
       try {
         const hash = await hashHandler(this.currDir, params);
         logInfo(hash);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
+    this.readline.prompt();
+  }
+
+  async do_compress(params) {
+    const paramsArr = parseParams(params);
+
+    if (paramsArr.length === 2) {
+      try {
+        await zipFile(this.currDir, paramsArr);
+      } catch {
+        this.operationFail();
+      }
+    } else {
+      this.inputError();
+    }
+
+    this.readline.prompt();
+  }
+
+  async do_decompress(params) {
+    const paramsArr = parseParams(params);
+
+    if (paramsArr.length === 2) {
+      try {
+        await unzipFile(this.currDir, paramsArr);
       } catch {
         this.operationFail();
       }

@@ -13,12 +13,6 @@ export const getUserName = () => {
 export const parseLine = (str) => {
   const command = str.trim().split(/\ +/, 1)[0];
   const params = str.trim().slice(command.length).trim();
-
-  // console.log('::: com>');
-  // console.dir(command);
-  // console.log('::: par>');
-  // console.dir(params);
-
   return { command, params };
 };
 
@@ -27,6 +21,17 @@ export const stripDoubleQuotes = (str) => {
     return str.slice(1, -1);
   }
   return str;
+};
+
+export const parseParams = (str) => {
+  if (str[0] === '"' && str[str.length - 1] === '"') {
+    const trimedStr = str.slice(1, -1);
+    const paramsArr = trimedStr.split(/\"\ +\"/);
+    return paramsArr;
+  }
+
+  const paramsArr = str.split(/\ +/);
+  return paramsArr;
 };
 
 export const isProvided = (params) => !!params.length;
