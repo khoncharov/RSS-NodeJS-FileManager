@@ -9,3 +9,8 @@ export const getGoodbyeStr = (userName) => `\n Thank you for using File Manager,
 export const getInvalidInputStr = () => 'Invalid input';
 
 export const getOperationFailedStr = () => 'Operation failed';
+
+export const zipOperation = {
+  UNZIP: 0,
+  ZIP: 1,
+};

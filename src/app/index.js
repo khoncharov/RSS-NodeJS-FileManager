@@ -1,6 +1,7 @@
 import os from 'os';
 import readline from 'readline';
 import { getInvalidInputStr } from './const.js';
+import { zipOperation } from './const.js';
 import { getGoodbyeStr } from './const.js';
 import { getGreetingStr } from './const.js';
 import { getPromptStr } from './const.js';
@@ -18,7 +19,7 @@ import { addFileHandler, catFileHandler, cpFileHandler } from './fs/index.js';
 import { mvFileHandler, rmFileHandler, rnFileHandler } from './fs/index.js';
 import { osHandler } from './os/index.js';
 import { hashHandler } from './hash/index.js';
-import { unzipFile, zipFile } from './zip/index.js';
+import { zipHandler } from './zip/index.js';
 
 class App {
   constructor() {
@@ -280,7 +281,7 @@ class App {
 
     if (paramsArr.length === 2) {
       try {
-        await zipFile(this.currDir, paramsArr);
+        await zipHandler(zipOperation.ZIP, this.currDir, paramsArr);
       } catch {
         this.operationFail();
       }
@@ -296,7 +297,7 @@ class App {
 
     if (paramsArr.length === 2) {
       try {
-        await unzipFile(this.currDir, paramsArr);
+        await zipHandler(zipOperation.UNZIP, this.currDir, paramsArr);
       } catch {
         this.operationFail();
       }
