@@ -34,4 +34,10 @@ export const parseParams = (str) => {
   return paramsArr;
 };
 
-export const isProvided = (params) => !!params.length;
+// export const isProvided = (params) => !!params.length;
+
+// export const
+
+// export const oneArgProvided = (args) => Boolean(args);
+
+// export const twoArgsProvided = (args) => Boolean(args);

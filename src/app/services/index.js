@@ -1,4 +1,4 @@
-import { logInputError } from '../errors/index.js';
+import { ivalidInputError } from '../errors/index.js';
 import { addNewFile } from './file-system.js';
 
 export const command = {
@@ -10,6 +10,6 @@ export const executeCommand = ({ cmdAlias, args }) => {
   if (cmdAlias in command) {
     command[cmdAlias].excute(args);
   } else {
-    logInputError();
+    throw ivalidInputError('invalid command alias');
   }
 };

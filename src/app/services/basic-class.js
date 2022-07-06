@@ -9,3 +9,13 @@ export class Cmd {
     throw new Error('Command is not implemented.');
   }
 }
+
+export class OneArgCmd extends Cmd {
+  noArgsProvided(args) {
+    return Boolean(args);
+  }
+
+  execute() {
+    throw new Error('Command is not implemented.');
+  }
+}

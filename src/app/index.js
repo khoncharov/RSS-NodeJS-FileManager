@@ -5,6 +5,7 @@ import { getGoodbyeStr } from './const.js';
 import { getGreetingStr } from './const.js';
 import { getPromptStr } from './const.js';
 import { parseLine } from './utils/func.js';
+import { logWarn } from './presentation/index.js';
 
 class App {
   constructor() {
@@ -12,7 +13,11 @@ class App {
   }
 
   lineHandler = (str) => {
-    executeCommand(parseLine(str));
+    try {
+      executeCommand(parseLine(str));
+    } catch (error) {
+      logWarn(error.message);
+    }
   };
 
   closeHandler = () => {
