@@ -11,9 +11,9 @@ export const getUserName = () => {
 };
 
 export const parseLine = (str) => {
-  const command = str.trim().split(/\ +/, 1)[0];
-  const params = str.trim().slice(command.length).trim();
-  return { command, params };
+  const cmdAlias = str.trim().split(/\ +/, 1)[0];
+  const args = str.trim().slice(cmdAlias.length).trim();
+  return { cmdAlias, args };
 };
 
 export const stripDoubleQuotes = (str) => {
@@ -35,7 +35,3 @@ export const parseParams = (str) => {
 };
 
 export const isProvided = (params) => !!params.length;
-
-export const logInfo = (str) => console.log(`\x1b[1;36m ${str}\x1b[0m`);
-
-export const logWarn = (str) => console.log(`\x1b[1;33m ${str}\x1b[0m`);
