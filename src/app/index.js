@@ -1,10 +1,9 @@
 import readline from 'readline';
 import { appData } from './data/index.js';
-import { command } from './services/index.js';
+import { executeCommand } from './services/index.js';
 import { getGoodbyeStr } from './const.js';
 import { getGreetingStr } from './const.js';
 import { getPromptStr } from './const.js';
-import { logInputError } from './errors/index.js';
 import { parseLine } from './utils/func.js';
 
 class App {
@@ -13,13 +12,7 @@ class App {
   }
 
   lineHandler = (str) => {
-    const { cmdAlias, args } = parseLine(str);
-
-    if (cmdAlias in command) {
-      command[cmdAlias].excute(args);
-    } else {
-      logInputError();
-    }
+    executeCommand(parseLine(str));
   };
 
   closeHandler = () => {
