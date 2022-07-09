@@ -22,7 +22,7 @@ export const catFileHandler = async (currDir, params) => {
 
   try {
     const content = await fsPromise.readFile(pathToFile, { encoding: 'utf-8' });
-    console.log(`\x1b[32m*** File content ***\x1b[0m`);
+    console.log(`\x1b[32;1m*** File content ***\x1b[0m`);
     console.log(content);
   } catch {
     throw new Error();
