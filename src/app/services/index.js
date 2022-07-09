@@ -9,6 +9,7 @@ import { lsCmd } from './cmd/nav/ls.js';
 import { hashCmd } from './cmd/hash/hash.js';
 import { unzipCmd, zipCmd } from './cmd/zip/zip.js';
 import { catCmd } from './cmd/fs/cat.js';
+import { addCmd } from './cmd/fs/add.js';
 
 const basic = [
   ['.help', helpCmd],
@@ -17,7 +18,7 @@ const basic = [
 ];
 
 const fs = [
-  ['add', '_Cmd'],
+  ['add', addCmd],
   ['cat', catCmd],
   ['cp', '_Cmd'],
   ['mv', '_Cmd'],
