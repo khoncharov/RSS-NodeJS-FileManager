@@ -1,8 +1,10 @@
+import EventEmitter from 'events';
 import os from 'os';
 import { getUserName } from '../utils/func.js';
 
-class AppData {
+class AppData extends EventEmitter {
   constructor() {
+    super();
     this._username = getUserName();
     this._currDir = os.homedir();
   }
@@ -17,6 +19,7 @@ class AppData {
 
   set currDir(value) {
     this._currDir = value;
+    this.emit('currDirChanged');
   }
 }
 

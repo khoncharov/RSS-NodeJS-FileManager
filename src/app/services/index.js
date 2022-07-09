@@ -1,15 +1,16 @@
-import { ivalidInputError } from '../errors/index.js';
-import { addNewFile } from './file-system.js';
+import { helpCmd } from './cmd/help.js';
+import { osCmd } from './cmd/os.js';
 
-export const command = {
-  // help: printHelp,
-  add: addNewFile,
-};
+export const commands = new Map([
+  ['.help', helpCmd],
+  ['os', osCmd],
+]);
 
 export const executeCommand = ({ cmdAlias, args }) => {
-  if (cmdAlias in command) {
-    command[cmdAlias].excute(args);
+  if (commands.has(cmdAlias)) {
+    const cmd = commands.get(cmdAlias);
+    return cmd.execute(args);
   } else {
-    throw ivalidInputError('invalid command alias');
+    throw new Error('INVALID_INPUT', { cause: 'Invalid command alias' });
   }
 };

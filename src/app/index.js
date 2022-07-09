@@ -14,9 +14,10 @@ class App {
 
   lineHandler = (str) => {
     try {
-      executeCommand(parseLine(str));
-    } catch (error) {
-      logWarn(error.message);
+      const result = executeCommand(parseLine(str));
+      console.log(result);
+    } catch (err) {
+      logWarn(`${err.message} : ${err.cause}`);
     }
   };
 
@@ -29,20 +30,24 @@ class App {
     console.clear();
     console.log(getGreetingStr(this.appData.username));
 
-    const rLine = readline.createInterface({
+    const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       prompt: getPromptStr(this.appData.currDir),
     });
 
-    rLine.prompt();
+    rl.prompt();
 
-    rLine.on('line', (line) => {
+    rl.on('line', (line) => {
       this.lineHandler(line);
-      rLine.prompt();
+      rl.prompt();
     });
 
-    rLine.on('close', this.closeHandler);
+    rl.on('close', this.closeHandler);
+
+    this.appData.on('currDirChanged', () => {
+      rl.setPrompt(this.appData.currDir);
+    });
   };
 }
 
