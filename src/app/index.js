@@ -5,7 +5,7 @@ import { getGoodbyeStr } from './const.js';
 import { getGreetingStr } from './const.js';
 import { getPromptStr } from './const.js';
 import { parseLine } from './utils/func.js';
-import { logWarn } from './presentation/index.js';
+import { logInfo, logWarn } from './presentation/index.js';
 
 class App {
   constructor() {
@@ -13,17 +13,16 @@ class App {
   }
 
   lineHandler = (str) => {
-    try {
-      const result = executeCommand(parseLine(str));
-      console.log(result);
-    } catch (err) {
-      logWarn(`${err.message} : ${err.cause}`);
+    if (str) {
+      try {
+        const result = executeCommand(parseLine(str));
+        if (result) {
+          logInfo(result);
+        }
+      } catch (err) {
+        logWarn(`${err.message} : ${err.cause}`);
+      }
     }
-  };
-
-  closeHandler = () => {
-    console.log(getGoodbyeStr(this.appData.username));
-    process.exit();
   };
 
   init = () => {
@@ -43,7 +42,9 @@ class App {
       rl.prompt();
     });
 
-    rl.on('close', this.closeHandler);
+    process.on('exit', () => {
+      console.log(getGoodbyeStr(this.appData.username));
+    });
 
     this.appData.on('currDirChanged', () => {
       rl.setPrompt(this.appData.currDir);

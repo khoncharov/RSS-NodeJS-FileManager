@@ -1,9 +1,13 @@
 import { errType } from '../const.js';
+import { clsCmd } from './cmd/cls.js';
+import { exitCmd } from './cmd/exit.js';
 import { helpCmd } from './cmd/help.js';
 import { osCmd } from './cmd/os.js';
 
 export const commands = new Map([
   ['.help', helpCmd],
+  ['.cls', clsCmd],
+  ['.exit', exitCmd],
   ['os', osCmd],
 ]);
 

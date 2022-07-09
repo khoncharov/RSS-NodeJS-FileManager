@@ -31,7 +31,7 @@ osCmd.executeCmd = (args) => {
       result = process.arch;
       break;
     default:
-      throw new Error(errType.INVALID_INPUT, { cause: 'Invalid arg' });
+      throw new Error('Invalid arg');
   }
   return result;
 };
