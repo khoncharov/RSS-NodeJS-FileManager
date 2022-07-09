@@ -1,3 +1,5 @@
+import fsPromise from 'fs/promises';
+import path from 'path';
 import { Cmd } from '../../basic-class.js';
 
 export const mvCmd = new Cmd();

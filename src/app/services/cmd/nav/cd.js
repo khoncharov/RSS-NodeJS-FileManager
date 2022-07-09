@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fsPromise from 'fs/promises';
 import path from 'path';
 import { Cmd } from '../../basic-class.js';
 
@@ -8,6 +8,6 @@ cdCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
   const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
-  await fs.readdir(absPathToFile);
+  await fsPromise.readdir(absPathToFile);
   this.appData.currDir = absPathToFile;
 };
