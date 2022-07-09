@@ -13,18 +13,14 @@ export const zipHandler = async (operation, currDir, argsArr) => {
   const sourceFile = path.resolve(currDir, argsArr[0]);
   const destPath = path.resolve(currDir, argsArr[1]);
 
-  try {
-    let ts;
-    const zipFile = operation;
-    if (zipFile) {
-      ts = zlib.createBrotliCompress();
-    } else {
-      ts = zlib.createBrotliDecompress();
-    }
-    await stream.pipeline(fs.createReadStream(sourceFile), ts, fs.createWriteStream(destPath));
-  } catch (err) {
-    throw new Error(err.message);
+  let ts;
+  const zipFile = operation;
+  if (zipFile) {
+    ts = zlib.createBrotliCompress();
+  } else {
+    ts = zlib.createBrotliDecompress();
   }
+  await stream.pipeline(fs.createReadStream(sourceFile), ts, fs.createWriteStream(destPath));
 };
 
 export const zipCmd = new Cmd();

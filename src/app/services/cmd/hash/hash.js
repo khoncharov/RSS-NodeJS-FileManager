@@ -9,11 +9,7 @@ hashCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
   const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
-  try {
-    const content = await fs.readFile(absPathToFile, 'utf-8');
-    const hash = crypto.createHash('sha256').update(content).digest('hex');
-    return hash;
-  } catch (err) {
-    throw new Error(err.message);
-  }
+  const content = await fs.readFile(absPathToFile, 'utf-8');
+  const hash = crypto.createHash('sha256').update(content).digest('hex');
+  return hash;
 };

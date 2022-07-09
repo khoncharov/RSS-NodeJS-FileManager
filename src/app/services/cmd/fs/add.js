@@ -8,12 +8,6 @@ addCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
   const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
-  let fd;
-  try {
-    fd = await fsPromise.open(absPathToFile, 'w');
-  } catch (err) {
-    throw new Error(err.message);
-  } finally {
-    await fd.close();
-  }
+  const fd = await fsPromise.open(absPathToFile, 'w');
+  await fd.close();
 };

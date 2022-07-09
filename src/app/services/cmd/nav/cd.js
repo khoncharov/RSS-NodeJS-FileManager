@@ -8,10 +8,6 @@ cdCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
   const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
-  try {
-    await fs.readdir(absPathToFile);
-    this.appData.currDir = absPathToFile;
-  } catch (err) {
-    throw new Error(err.message);
-  }
+  await fs.readdir(absPathToFile);
+  this.appData.currDir = absPathToFile;
 };
