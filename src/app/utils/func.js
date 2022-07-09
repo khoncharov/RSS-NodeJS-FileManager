@@ -16,28 +16,15 @@ export const parseLine = (str) => {
   return { cmdAlias, args };
 };
 
-export const stripDoubleQuotes = (str) => {
-  if (str[0] === '"' && str[str.length - 1] === '"') {
-    return str.slice(1, -1);
+export const parseArgs = (str) => {
+  if (str === '') {
+    return [];
   }
-  return str;
-};
-
-export const parseParams = (str) => {
-  if (str[0] === '"' && str[str.length - 1] === '"') {
+  if (str[0] === '"' && str[str.length - 1] === '"' && str.length > 1) {
     const trimedStr = str.slice(1, -1);
-    const paramsArr = trimedStr.split(/\"\ +\"/);
-    return paramsArr;
+    const argsArr = trimedStr.split(/\"\ +\"/);
+    return argsArr;
   }
-
-  const paramsArr = str.split(/\ +/);
-  return paramsArr;
+  const argsArr = str.split(/\ +/);
+  return argsArr;
 };
-
-// export const isProvided = (params) => !!params.length;
-
-// export const
-
-// export const oneArgProvided = (args) => Boolean(args);
-
-// export const twoArgsProvided = (args) => Boolean(args);
