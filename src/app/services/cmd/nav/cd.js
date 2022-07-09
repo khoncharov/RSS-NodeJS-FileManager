@@ -5,13 +5,12 @@ import { Cmd } from '../../basic-class.js';
 export const cdCmd = new Cmd();
 cdCmd.argsNum = 1;
 cdCmd.executeCmd = async function (args) {
-  const pathStr = args[0];
-  const currPath = this.appData.currDir;
-  const newPath = path.resolve(currPath, pathStr);
+  const pathToFile = args[0];
+  const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
   try {
-    await fs.readdir(newPath);
-    this.appData.currDir = newPath;
+    await fs.readdir(absPathToFile);
+    this.appData.currDir = absPathToFile;
   } catch (err) {
     throw new Error(err.message);
   }

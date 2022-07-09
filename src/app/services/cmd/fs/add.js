@@ -6,8 +6,7 @@ export const addCmd = new Cmd();
 addCmd.argsNum = 1;
 addCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
-  const currDir = this.appData.currDir;
-  const absPathToFile = path.resolve(currDir, pathToFile);
+  const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
   let fd;
   try {

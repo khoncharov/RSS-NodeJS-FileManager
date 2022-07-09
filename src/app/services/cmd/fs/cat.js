@@ -23,8 +23,7 @@ catCmd.argsNum = 1;
 // Streaming version
 catCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
-  const currDir = this.appData.currDir;
-  const absPathToFile = path.resolve(currDir, pathToFile);
+  const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
   try {
     const fd = await fsPromise.open(absPathToFile, 'r');

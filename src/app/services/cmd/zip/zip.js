@@ -30,15 +30,13 @@ export const zipHandler = async (operation, currDir, argsArr) => {
 export const zipCmd = new Cmd();
 zipCmd.argsNum = 2;
 zipCmd.executeCmd = async function (args) {
-  const currPath = this.appData.currDir;
-  await zipHandler(zipOperation.ZIP, currPath, args);
+  await zipHandler(zipOperation.ZIP, this.appData.currDir, args);
   return `File zipped`;
 };
 
 export const unzipCmd = new Cmd();
 unzipCmd.argsNum = 2;
 unzipCmd.executeCmd = async function (args) {
-  const currPath = this.appData.currDir;
-  await zipHandler(zipOperation.UNZIP, currPath, args);
+  await zipHandler(zipOperation.UNZIP, this.appData.currDir, args);
   return `File unzipped`;
 };

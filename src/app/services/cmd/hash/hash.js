@@ -7,8 +7,7 @@ export const hashCmd = new Cmd();
 hashCmd.argsNum = 1;
 hashCmd.executeCmd = async function (args) {
   const pathToFile = args[0];
-  const currPath = this.appData.currDir;
-  const absPathToFile = path.resolve(currPath, pathToFile);
+  const absPathToFile = path.resolve(this.appData.currDir, pathToFile);
 
   try {
     const content = await fs.readFile(absPathToFile, 'utf-8');
