@@ -1,5 +1,12 @@
 import { Cmd } from '../../basic-class.js';
 
-export const _Cmd = new Cmd();
-_Cmd.argsNum = -1;
-_Cmd.executeCmd = async function (args) {};
+export const rnCmd = new Cmd();
+rnCmd.argsNum = 2;
+rnCmd.executeCmd = async function (args) {
+  const [pathToSrc, newFileName] = args;
+  const srcFileName = path.parse(pathToSrc).base;
+  const absPathToSrc = path.resolve(this.appData.currDir, pathToSrc);
+  const absPathToDest = path.resolve(absPathToSrc, '..', srcFileName);
+
+  await fsPromise.rename(absPathToFile, absPathToDest);
+};

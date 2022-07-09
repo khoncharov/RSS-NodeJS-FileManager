@@ -11,6 +11,9 @@ import { unzipCmd, zipCmd } from './cmd/zip/zip.js';
 import { catCmd } from './cmd/fs/cat.js';
 import { addCmd } from './cmd/fs/add.js';
 import { rmCmd } from './cmd/fs/rm.js';
+import { cpCmd } from './cmd/fs/cp.js';
+import { mvCmd } from './cmd/fs/mv.js';
+import { rnCmd } from './cmd/fs/rn.js';
 
 const basic = [
   ['.help', helpCmd],
@@ -21,10 +24,10 @@ const basic = [
 const fs = [
   ['add', addCmd],
   ['cat', catCmd],
-  ['cp', '_Cmd'],
-  ['mv', '_Cmd'],
+  ['cp', cpCmd],
+  ['mv', mvCmd],
   ['rm', rmCmd],
-  ['rn', '_Cmd'],
+  ['rn', rnCmd],
 ];
 
 const navigation = [
