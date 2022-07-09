@@ -1,4 +1,5 @@
 import os from 'os';
+import { errType } from '../../const.js';
 import { Cmd } from '../basic-class.js';
 
 export const osCmd = new Cmd();
@@ -30,7 +31,7 @@ osCmd.executeCmd = (args) => {
       result = process.arch;
       break;
     default:
-      throw new Error('INVALID_INPUT', { cause: 'Invalid agr' });
+      throw new Error(errType.INVALID_INPUT, { cause: 'Invalid arg' });
   }
   return result;
 };

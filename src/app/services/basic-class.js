@@ -1,3 +1,4 @@
+import { errType } from '../const.js';
 import { appData } from '../data/index.js';
 import { parseArgs } from '../utils/func.js';
 
@@ -17,7 +18,7 @@ export class Cmd {
         return argsArr;
       }
 
-      throw new Error('INVALID_INPUT', { cause: 'Invalid args number' });
+      throw new Error(errType.INVALID_INPUT, { cause: 'Invalid args number' });
     }
   };
 
@@ -25,7 +26,7 @@ export class Cmd {
     try {
       func(args);
     } catch (err) {
-      throw new Error('OPERATION_FAILED', { cause: err.message });
+      throw new Error(errType.OPERATION_FAILED, { cause: err.message });
     }
   };
 
@@ -39,6 +40,6 @@ export class Cmd {
   };
 
   executeCmd = () => {
-    throw new Error('OPERATION_FAILED', { cause: 'Command is not implemented' });
+    throw new Error(errType.OPERATION_FAILED, { cause: 'Command is not implemented' });
   };
 }

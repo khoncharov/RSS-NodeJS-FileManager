@@ -1,3 +1,4 @@
+import { errType } from '../const.js';
 import { helpCmd } from './cmd/help.js';
 import { osCmd } from './cmd/os.js';
 
@@ -11,6 +12,6 @@ export const executeCommand = ({ cmdAlias, args }) => {
     const cmd = commands.get(cmdAlias);
     return cmd.execute(args);
   } else {
-    throw new Error('INVALID_INPUT', { cause: 'Invalid command alias' });
+    throw new Error(errType.INVALID_INPUT, { cause: 'Invalid command alias' });
   }
 };

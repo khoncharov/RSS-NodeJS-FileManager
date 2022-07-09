@@ -5,3 +5,5 @@ export const getPromptStr = (currentDir) =>
   `\n\x1b[32m You are currently in \x1b[0m${currentDir}\n\n> `;
 
 export const getGoodbyeStr = (userName) => `\n Thank you for using File Manager, ${userName}!\n`;
+
+export const errType = { INVALID_INPUT: 'Invalid input', OPERATION_FAILED: 'Operation failed' };
