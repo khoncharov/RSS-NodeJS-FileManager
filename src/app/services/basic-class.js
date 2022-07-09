@@ -22,24 +22,16 @@ export class Cmd {
     }
   };
 
-  catchOperationFail = (func, args) => {
+  execute = async (args) => {
+    const argsArr = this.checkArgs(args);
     try {
-      func(args);
+      return await this.executeCmd(argsArr);
     } catch (err) {
       throw new Error(errType.OPERATION_FAILED, { cause: err.message });
     }
   };
 
-  execute = (args) => {
-    let result;
-    const argsArr = this.checkArgs(args);
-    this.catchOperationFail(() => {
-      result = this.executeCmd(argsArr);
-    });
-    return result;
-  };
-
-  executeCmd = () => {
-    throw new Error(errType.OPERATION_FAILED, { cause: 'Command is not implemented' });
-  };
+  async executeCmd() {
+    throw new Error('Command is not implemented');
+  }
 }

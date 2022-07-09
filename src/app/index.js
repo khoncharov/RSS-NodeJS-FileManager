@@ -12,15 +12,15 @@ class App {
     this.appData = appData;
   }
 
-  lineHandler = (str) => {
+  lineHandler = async (str) => {
     if (str) {
       try {
-        const result = executeCommand(parseLine(str));
+        const result = await executeCommand(parseLine(str));
         if (result) {
           logInfo(result);
         }
       } catch (err) {
-        logWarn(`${err.message} : ${err.cause}`);
+        logWarn(`${err.message} : ${err.cause ? err.cause : '-'}`);
       }
     }
   };
@@ -37,8 +37,8 @@ class App {
 
     rl.prompt();
 
-    rl.on('line', (line) => {
-      this.lineHandler(line);
+    rl.on('line', async (line) => {
+      await this.lineHandler(line);
       rl.prompt();
     });
 
@@ -47,7 +47,7 @@ class App {
     });
 
     this.appData.on('currDirChanged', () => {
-      rl.setPrompt(this.appData.currDir);
+      rl.setPrompt(getPromptStr(this.appData.currDir));
     });
   };
 }
