@@ -7,6 +7,7 @@ import { cdCmd } from './cmd/nav/cd.js';
 import { upCmd } from './cmd/nav/up.js';
 import { lsCmd } from './cmd/nav/ls.js';
 import { hashCmd } from './cmd/hash/hash.js';
+import { unzipCmd, zipCmd } from './cmd/zip/zip.js';
 
 const basic = [
   ['.help', helpCmd],
@@ -20,7 +21,18 @@ const navigation = [
   ['ls', lsCmd],
 ];
 
-export const commands = new Map([...basic, ...navigation, ['os', osCmd], ['hash', hashCmd]]);
+const zip = [
+  ['zip', zipCmd],
+  ['unzip', unzipCmd],
+];
+
+export const commands = new Map([
+  ...basic,
+  ...navigation,
+  ...zip,
+  ['os', osCmd],
+  ['hash', hashCmd],
+]);
 
 export const executeCommand = async ({ cmdAlias, args }) => {
   if (commands.has(cmdAlias)) {
