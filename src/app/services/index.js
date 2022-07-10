@@ -1,7 +1,7 @@
 import { errType } from '../const.js';
-import { helpCmd } from './cmd/basic/help.js';
-import { clsCmd } from './cmd/basic/cls.js';
-import { exitCmd } from './cmd/basic/exit.js';
+import { helpCmd } from './cmd/system/help.js';
+import { clsCmd } from './cmd/system/cls.js';
+import { exitCmd } from './cmd/system/exit.js';
 import { osCmd } from './cmd/os/os.js';
 import { cdCmd } from './cmd/nav/cd.js';
 import { upCmd } from './cmd/nav/up.js';
@@ -15,7 +15,7 @@ import { cpCmd } from './cmd/fs/cp.js';
 import { mvCmd } from './cmd/fs/mv.js';
 import { rnCmd } from './cmd/fs/rn.js';
 
-const basic = [
+const system = [
   ['.help', helpCmd],
   ['.cls', clsCmd],
   ['.exit', exitCmd],
@@ -39,10 +39,12 @@ const navigation = [
 const zip = [
   ['zip', zipCmd],
   ['unzip', unzipCmd],
+  ['compress', zipCmd],
+  ['decompress', unzipCmd],
 ];
 
 export const commands = new Map([
-  ...basic,
+  ...system,
   ...fs,
   ...navigation,
   ...zip,
