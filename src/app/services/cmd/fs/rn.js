@@ -6,9 +6,8 @@ export const rnCmd = new Cmd();
 rnCmd.argsNum = 2;
 rnCmd.executeCmd = async function (args) {
   const [pathToSrc, newFileName] = args;
-  const srcFileName = path.parse(pathToSrc).base;
   const absPathToSrc = path.resolve(this.appData.currDir, pathToSrc);
-  const absPathToDest = path.resolve(absPathToSrc, '..', srcFileName);
+  const absPathToDest = path.resolve(absPathToSrc, '..', newFileName);
 
-  await fsPromise.rename(absPathToFile, absPathToDest);
+  await fsPromise.rename(absPathToSrc, absPathToDest);
 };
