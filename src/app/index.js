@@ -20,7 +20,7 @@ class App {
           logInfo(result);
         }
       } catch (err) {
-        logWarn(`${err.message} : ${err.cause ? err.cause : '-'}`);
+        logWarn(`${err.message} | ${err.cause ? err.cause : '-'}`);
       }
     }
   };
