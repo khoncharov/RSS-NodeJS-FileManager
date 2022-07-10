@@ -1,36 +1,36 @@
 import os from 'os';
+import { Cmd } from '../../basic-class.js';
 
-export const osHandler = (param) => {
-  switch (param) {
+export const osCmd = new Cmd();
+osCmd.argsNum = 1;
+osCmd.executeCmd = (args) => {
+  let result = '';
+  const arg = args[0];
+  switch (arg) {
     case '--EOL':
-      return JSON.stringify(os.EOL);
-
+      result = JSON.stringify(os.EOL);
+      break;
     case '--cpus':
-      let result = '';
-
       const cpuInfo = os.cpus();
-
       result += `cpu count: ${cpuInfo.length}`;
-
       cpuInfo.forEach((cpu, idx) => {
         result += `\n cpu ${(idx += 1)}`;
         result += `\n - model: ${cpu.model}`;
         result += `\n - speed: ${(cpu.speed / 1000).toFixed(3)} GHz`;
       });
-
-      return result;
-
+      break;
     case '--homedir':
-      return os.homedir();
-
+      result = os.homedir();
+      break;
     case '--username':
-      return process.env.USERNAME;
-
+      result = process.env.USERNAME;
+      break;
     case '--arch':
     case '--architecture':
-      return process.arch;
-
+      result = process.arch;
+      break;
     default:
-      return null;
+      throw new Error('Invalid arg');
   }
+  return result;
 };

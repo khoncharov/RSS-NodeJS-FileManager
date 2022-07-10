@@ -1,4 +1,6 @@
-export const getHelpTxt = () => `List of operations:
+import { Cmd } from '../../basic-class.js';
+
+const HELP_TEXT = `List of operations:
 
 - Use double quotes to enter 2 paths where at least one with a space.
 - .exit .help .cls
@@ -29,3 +31,9 @@ export const getHelpTxt = () => `List of operations:
 - Compress and decompress operations
   compress path_to_file path_to_destination  (shortcut: zip)
   decompress path_to_file path_to_destination  (shortcut: unzip)`;
+
+export const helpCmd = new Cmd();
+helpCmd.argsNum = 0;
+helpCmd.executeCmd = () => {
+  return HELP_TEXT;
+};

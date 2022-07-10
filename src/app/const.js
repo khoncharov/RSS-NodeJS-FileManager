@@ -6,11 +6,4 @@ export const getPromptStr = (currentDir) =>
 
 export const getGoodbyeStr = (userName) => `\n Thank you for using File Manager, ${userName}!\n`;
 
-export const getInvalidInputStr = () => 'Invalid input';
-
-export const getOperationFailedStr = () => 'Operation failed';
-
-export const zipOperation = {
-  UNZIP: 0,
-  ZIP: 1,
-};
+export const errType = { INVALID_INPUT: 'Invalid input', OPERATION_FAILED: 'Operation failed' };

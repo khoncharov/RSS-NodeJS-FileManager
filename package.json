@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "test": "node ./src/test/0.js"
+    "test": "node ./src/test/test.js"
   },
   "author": "Konstantin Honcharov",
   "license": "ISC"
