@@ -1,3 +1,4 @@
+import fs from 'fs';
 import fsPromise from 'fs/promises';
 import path from 'path';
 import { Cmd } from '../../basic-class.js';
